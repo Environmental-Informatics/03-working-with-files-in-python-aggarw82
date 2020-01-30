@@ -1,20 +1,22 @@
+""" Program to read data from file, process it
+    and write processed data to a file
+    
+    Some funcitons for this excercise have been
+    defined in util_fun.py
+
+    Author: Varun Aggarwal
+    Username: aggarw82
+    Github: https://github.com/Environmental-Informatics/03-working-with-files-in-python-aggarw82
+"""
+
+# import libraries
 import numpy as np
 import ast 
 
-def convertDatatype(inpList):
-    """Convert datatype of each element
-    of inpList 
+# import user defined funcitons
+import util_fun as uf
 
-    inpList: Input list
-    dataTypes: define datatypes 
-    """
 
-    dataTypes = [int, float, str, complex]
-    for i in dataTypes:
-        try:
-            return i(inpList)
-        except ValueError:
-            pass
 
 def readFile(fileName):
     """Read file and return a list of lines
@@ -28,17 +30,53 @@ def readFile(fileName):
     data.close() 
     return datalines
 
-def extract_exception_lines(datalines):
-    """ extract header and remarks from file
+def writeHeader(fileName):
+    """Write header block in specified format
 
-    datalines: list of lines
+    fileName: name of the file
+    """
+    
+    data = open(fileName,"w") 
+
+    # writeFile
+    data.write("Raccoon name: {0}\n".format(name))
+    data.write("Average location: {0:.2f}, {1:.2f}\n".format(avg_X, avg_Y))
+    data.write("Distance traveled: {0:.2f}\n".format(total_dist))
+    data.write("Average energy level: {0:.2f}\n".format(avg_energy))
+    data.write("Raccoon end state: {0}\n\n".format(last_line))
+    data.close() 
+
+def writeData(fileName, datalines):
+    """Write header block in specified format
+
+    fileName: name of the file
+    """
+    
+    data = open(fileName,"a") 
+
+    # writeFile
+    data.write("Date,Time,X,Y,Asleep,Behavior Mode,Distance\n")
+    for i in range(len(datalines["Day"])):
+        data.write("{0},{1},{2},{3},{4},{5},{6}\n".format(datalines["Day"][i],datalines["Time"][i],datalines["X"][i],datalines["Y"][i],datalines["Asleep"][i],datalines["Behavior Mode"][i],datalines["Distance"][i]))
+    data.close() 
+
+def convertDatatype(inpList):
+    """Convert datatype of each element
+    of inpList 
+
+    inpList: Input list
+    dataTypes: define datatypes 
     """
 
-    return datalines[0], datalines[-1], datalines[1:-1]
+    dataTypes = [int, float, complex, str]
+    for i in dataTypes:
+        try:
+            return i(inpList)
+        except ValueError:
+            pass
 
 def listToDictionary(datalines, keys):
     """ create a dictionary of data using keys 
-    from a list of keys
 
     datalines: list of lines
     keys: keys from dictionary
@@ -51,15 +89,22 @@ def listToDictionary(datalines, keys):
     return dictionary
 
 
+# read Data File
 datalines = readFile("2008male00006.txt")
-header, last_line, datalines = extract_exception_lines(datalines)
-datalines = listToDictionary(datalines, header.split(","))
 
-# debug
-print(datalines)
-# print(datalines)
-# print(header)
-# print(last_line)
+header, last_line, datalines = y=uf.extract_exception_lines(datalines)
 
+# create dictionary for input file
+datalines = listToDictionary(datalines, header)
+datalines["Distance"] = uf.list_sum(uf.list_distance(datalines["X"], datalines["Y"]))
 
+# write the header block
+name = last_line.split()[0]
+avg_energy = uf.list_mean(datalines["Energy Level"])
+avg_X = uf.list_mean(datalines["X"])
+avg_Y = uf.list_mean(datalines["Y"])
+total_dist = datalines["Distance"][-1]
+writeHeader('Georges_life.txt.txt')
 
+# write data to file
+writeData('Georges_life.txt.txt', datalines)

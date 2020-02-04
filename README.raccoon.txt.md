@@ -16,8 +16,8 @@ ast
 
 ## Input and Output
 
-Input File: 2008Male00006.txt
-Output File: Georges_life.txt
+* Input File: 2008Male00006.txt
+* Output File: Georges_life.txt
 
 ### Running the tests
 
@@ -31,9 +31,8 @@ python Evaluate_Raccoon_Life.py
 
 ## Authors
 
-* **Varun Aggarwal** - *Initial work* - [Varun Aggarwal](https://github.com/aggarw82)
+* **Varun Aggarwal** - *Life of Raccoon* - [Varun Aggarwal](https://github.com/aggarw82)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 

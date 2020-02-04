@@ -16,12 +16,13 @@ ast
 
 ## Input and Output
 
-* Input File: 2008Male00006.txt
-* Output File: Georges_life.txt
+Input File: 2008Male00006.txt   
+Output File: Georges_life.txt
 
 ### Running the tests
 
-Ensure data file is in same folder as the script
+Ensure data file is in same folder as the script  
+  
 On Linux/Conda:  
 
 ```

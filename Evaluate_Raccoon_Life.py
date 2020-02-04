@@ -47,7 +47,7 @@ def writeHeader(fileName):
     data.close() 
 
 def writeData(fileName, datalines):
-    """Write header block in specified format
+    """Write data in specific format
 
     fileName: name of the file
     """
@@ -84,8 +84,8 @@ def listToDictionary(datalines, keys):
 
     dictionary = {} # empty
     for i, key in enumerate(keys):
-        temp_data = [j.split(",")[i] for j in datalines] # read each column
-        dictionary[key] = [convertDatatype(x) for x in temp_data] # convert datatype of elements
+        temp_data = [j.split(",")[i] for j in datalines]            # read each column
+        dictionary[key] = [convertDatatype(x) for x in temp_data]   # convert datatype of elements
     return dictionary
 
 

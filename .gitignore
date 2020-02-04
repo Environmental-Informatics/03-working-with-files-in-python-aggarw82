@@ -62,8 +62,8 @@ Temporary Items
 Depreciated/
 
 # ignore text data files (reconsider in the future?)
-*.txt
-*.csv
+#*.txt
+#*.csv
 
 # make sure gitigrnoe file is included in the repository
 !.gitignore

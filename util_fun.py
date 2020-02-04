@@ -1,4 +1,4 @@
-""" Necesssary functions for this excercise
+	""" Necesssary functions for this excercise
 	Including sum, avg and distance
 
 	Author: Varun Aggarwal
@@ -13,7 +13,7 @@ def extract_exception_lines(datalines):
 	# remove white spaces from headers, remarks, data
     return [i.strip() for i in datalines[0].split(",")], datalines[-1], datalines[1:-1]
 
-# calculate mean pf list
+# calculate mean of list
 def list_mean(inpList):
 	return np.mean(inpList)
 
